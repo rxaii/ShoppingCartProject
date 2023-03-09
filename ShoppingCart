@@ -1,0 +1,108 @@
+#include <iostream>
+#include <iomanip>
+#include <string>
+using namespace std;
+struct Item {
+    string SKU, name;
+    int numItem;
+    double price;
+    int quantity;    
+};
+int main() {  
+string username = "jsmith", password = "blue123";
+string input; 
+ cout << "Enter Username: ";
+ cin >> input;
+if (input!=username) {
+  cout << "Error: Invalid Credentials" << endl;
+return 0;
+}
+if (input==username) { 
+ cout << "Enter Password: ";
+ cin >> input; 
+}
+if (input!=password) {
+  cout << "Error: Invalid Credentials" << endl;
+return 0;
+
+}
+
+    Item item1 = Item{"HF-342", "1/2 in Bolt", 50, 20.00, 200};
+    Item item2 = Item{"LK-322", "1/4 in Nail", 25, 5.75, 76};
+    Item item3 = Item{"KF-231", "Hammer", 1, 15.23, 100};
+  double storeCredit = 3000.00;
+  int quantity;
+  cout << "Enter the SKU of the item you want to purchase: ";
+  cin >> input;
+  if (!(input==item1.SKU or input==item2.SKU or input==item3.SKU)) {
+    cout << "Error: Invalid SKU" << endl;
+    return 0;
+  }
+  
+  if ((input==item1.SKU)) {
+  cout << "Enter the quantity you want to purchase: ";
+  cin >> quantity;
+  }
+  if (quantity > 200 or quantity < 0) {
+    cout << "Error: Invalid Quanity" << endl; 
+    return 0;
+  }
+  if ((input==item2.SKU)) {
+  cout << "Enter the quantity you want to purchase: ";
+  cin >> quantity;
+  }
+  if (quantity > 76 or quantity < 0) {
+    cout << "Error: Invalid Quanity" << endl; 
+    return 0;
+  }
+  if ((input==item3.SKU)) {
+  cout << "Enter the quantity you want to purchase: ";
+  cin >> quantity;
+  }
+  if (quantity > 100 or quantity < 0) {
+    cout << "Error: Invalid Quanity" << endl; 
+    return 0;
+  }
+  
+  double total_price;
+  if (item1.SKU==input) {
+    total_price = item1.price * quantity * 1.06;
+  } 
+  if (item2.SKU==input) {
+    total_price = item2.price * quantity * 1.06;
+  }
+  if (item3.SKU==input) {
+    total_price = item3.price * quantity * 1.06;
+  }
+  if (total_price > storeCredit) {
+    cout << "Error: Not enough store credit" << endl;
+    return 0;
+  }  
+  double itemPrice;
+  string itemName = "";
+  if (item1.SKU==input) {
+    storeCredit = storeCredit - total_price;
+    itemName = item1.name;
+    itemPrice = item1.price;
+  }
+  if (item2.SKU==input) {
+    storeCredit = storeCredit - total_price;
+    itemName = item2.name;
+    itemPrice = item2.price;
+  }
+  if (item3.SKU==input) {
+    storeCredit = storeCredit - total_price;
+    itemName = item3.name;
+    itemPrice = item3.price;
+  }
+   cout << fixed << setprecision(2);
+   cout << "Receipt:" << endl;
+   cout << "Item: " << itemName << endl;
+   cout << "Price: $" << itemPrice << endl;
+   cout << "Quantity: " << quantity << endl;
+   cout << "Subtotal: $" << itemPrice * quantity << endl;
+   cout << "Tax: $" << itemPrice * quantity * 0.06 << endl;
+   cout << "Total: $" << total_price << endl;
+   cout << "Store Credit Balance: $" << storeCredit << endl;
+  return 0;
+}
